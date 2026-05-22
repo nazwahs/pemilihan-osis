@@ -239,7 +239,7 @@
 
                     <a href="{{ route('osis.pendaftaran') }}" class="btn-primary">
                         <i class="fas fa-pencil-alt"></i>
-                        Daftar Sekarang
+                        Daftar
                     </a>
 
                     <a href="{{ route('osis.informasi') }}" class="btn-secondary">
