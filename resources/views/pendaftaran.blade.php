@@ -512,54 +512,8 @@
                                 </button>
                             </div>
                         </div>
-
-                        <div class="step-2 hidden">
-                            <label>Pilih Sekbid yang diminati <span class="required">*</span></label>
-                            <div class="sekbid-grid" id="sekbidGrid">
-                                @foreach($sekbid as $id => $data)
-                                <div class="sekbid-option" data-id="{{ $id }}" data-nama="{{ $data['nama'] }}">
-                                    <div class="radio-check"></div>
-                                    <div class="sekbid-icon">
-                                        <i class="fas fa-{{ $data['icon'] }}" style="color: {{ $data['color'] }}"></i>
-                                    </div>
-                                    <div class="sekbid-name">{{ $data['nama'] }}</div>
-                                </div>
-                                @endforeach
-                            </div>
-                            <input type="hidden" name="sekbid_id" id="selectedSekbid" required>
-                            @error('sekbid_id') <small style="color:#e53e3e">{{ $message }}</small> @enderror
-
-                            <div class="form-group">
-                                <label>📌 Mengapa Anda tertarik di sekbid ini? <span class="required">*</span></label>
-                                <textarea name="alasan" rows="3" required placeholder="Jelaskan alasan ketertarikan Anda terhadap sekbid pilihan...">{{ old('alasan') }}</textarea>
-                                @error('alasan') <small style="color:#e53e3e">{{ $message }}</small> @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label>📌 Kontribusi apa yang bisa Anda berikan? <span class="required">*</span></label>
-                                <textarea name="kontribusi" rows="3" required placeholder="Tuliskan ide, program kerja, atau kontribusi nyata yang akan Anda lakukan...">{{ old('kontribusi') }}</textarea>
-                                @error('kontribusi') <small style="color:#e53e3e">{{ $message }}</small> @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label>🏆 Pengalaman Organisasi (Opsional)</label>
-                                <textarea name="pengalaman" rows="2" placeholder="Pernah menjabat sebagai? (OSIS, MPK, Pramuka, dll)">{{ old('pengalaman') }}</textarea>
-                            </div>
-
-                            <div class="form-actions">
-                                <button type="submit" class="btn-primary">
-                                    <i class="fas fa-paper-plane"></i>
-                                    Submit Pendaftaran
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
         <footer>
-            <i class="fas fa-copyright"></i> 2026 - Sistem Pemilihan OSIS | Berdasarkan Flowchart Resmi
+            <i class="fas fa-copyright"></i> 2026 - Sistem Pemilihan OSIS
         </footer>
     </div>
 
@@ -570,9 +524,7 @@
         const hiddenInput = document.getElementById('selectedSekbid');
 
         nextBtn.addEventListener('click', () => {
-            step2.classList.remove('hidden');
-            nextBtn.classList.add('hidden');
-            step2.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            window.location.href = "{{ route('osis.pilihBidang') }}";
         });
 
         sekbidOptions.forEach(option => {

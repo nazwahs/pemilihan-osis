@@ -10,7 +10,11 @@ Route::get('/pengumuman', [OsisController::class, 'pengumuman'])->name('osis.pen
 
 Route::prefix('osis')->group(function () {
     Route::get('/pendaftaran', [OsisController::class, 'index'])->name('osis.pendaftaran');
+    Route::get('/pilih-bidang', function () {
+        return view('pilih_bidang');
+    })->name('osis.pilihBidang');
     Route::post('/submit', [OsisController::class, 'submit'])->name('osis.submit');
+    Route::post('/save-bidang', [OsisController::class, 'saveBidang'])->name('osis.saveBidang');
     Route::post('/verifikasi/{id}', [OsisController::class, 'verifikasi'])->name('osis.verifikasi');
     Route::delete('/hapus/{id}', [OsisController::class, 'destroy'])->name('osis.destroy');
 });
