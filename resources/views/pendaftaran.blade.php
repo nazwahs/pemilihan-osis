@@ -6,9 +6,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Pemilihan OSIS | Pendaftaran Calon Pengurus</title>
     
-    <!-- Google Fonts & Font Awesome -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <style>
         * {
@@ -128,10 +128,6 @@
             box-shadow: 0 25px 60px rgba(2,6,23,0.6);
         }
 
-        .card-header {
-            display: none;
-        }
-
         .card-body {
             padding: 2.2rem;
         }
@@ -143,17 +139,10 @@
             color: white;
         }
 
-        .card-header i {
-            margin-right: 0.7rem;
-        }
-
-        .card-body {
-            padding: 1.8rem;
-        }
-
         /* Form Elements */
         .form-group {
             margin-bottom: 1.2rem;
+            position: relative;
         }
 
         label {
@@ -183,6 +172,12 @@
             min-height: 3.5rem;
         }
 
+        textarea {
+            border-radius: 1.5rem !important;
+            padding: 1.25rem !important;
+            resize: none;
+        }
+
         input::placeholder, textarea::placeholder {
             color: #9ca3af;
         }
@@ -200,8 +195,6 @@
             align-items: start;
             margin-bottom: 1rem;
         }
-
-        .form-group { position: relative; margin-bottom: 0.85rem; }
 
         .icon-circle {
             position: absolute;
@@ -234,7 +227,7 @@
 
         .btn-primary:hover { transform: translateY(-2px); }
 
-        .form-actions { display: flex; justify-content: flex-end; margin-top: 0.6rem; }
+        .form-actions { display: flex; justify-content: flex-end; margin-top: 0.6rem; gap: 1rem; }
 
         .hidden { display: none; }
 
@@ -297,140 +290,62 @@
             box-shadow: inset 0 0 0 3px white;
         }
 
-        /* Button */
-        .btn-submit {
-            width: 100%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            padding: 0.9rem;
-            border-radius: 0.75rem;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-top: 0.5rem;
-        }
-
-        .btn-submit:hover {
-            transform: scale(0.98);
-            background: linear-gradient(135deg, #5a67d8, #6b46a0);
-        }
-
-        /* Pendaftar List */
-        .pendaftar-list {
-            max-height: 500px;
-            overflow-y: auto;
-        }
-
-        .pendaftar-item {
-            background: #f7fafc;
-            border-radius: 1rem;
+        /* --- STYLE BARU BAGIAN QUIZ --- */
+        .quiz-progress-container {
+            background: rgba(255, 255, 255, 0.05);
             padding: 1rem;
-            margin-bottom: 1rem;
-            border-left: 4px solid;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .quiz-progress-bar-wrapper {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            height: 6px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+        .quiz-progress-fill {
+            background: #f59e5b;
+            height: 100%;
+            width: 20%;
+            transition: width 0.3s ease;
+        }
+        .quiz-option-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 1.2rem;
+            border-radius: 1rem;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
             transition: all 0.2s;
         }
-
-        .pendaftar-item.pending {
-            border-left-color: #ed8936;
+        .quiz-option-item:hover {
+            background: rgba(245, 158, 91, 0.05);
+            border-color: #f59e5b;
         }
-
-        .pendaftar-item.verified {
-            border-left-color: #48bb78;
+        .quiz-option-item.selected {
+            background: rgba(245, 158, 91, 0.1);
+            border-color: #f59e5b;
         }
-
-        .pendaftar-name {
-            font-weight: 700;
-            font-size: 1rem;
-            color: #2d3748;
-        }
-
-        .pendaftar-detail {
-            font-size: 0.8rem;
-            color: #718096;
-            margin: 0.3rem 0;
-        }
-
-        .status-badge {
-            display: inline-block;
-            padding: 0.2rem 0.6rem;
-            border-radius: 50px;
-            font-size: 0.7rem;
-            font-weight: 600;
-        }
-
-        .status-pending {
-            background: #feebc8;
-            color: #c05621;
-        }
-
-        .status-verified {
-            background: #c6f6d5;
-            color: #276749;
-        }
-
-        .jadwal-info {
-            background: #e9d8fd;
-            padding: 0.5rem;
-            border-radius: 0.5rem;
-            margin-top: 0.5rem;
-            font-size: 0.75rem;
-        }
-
-        .action-buttons {
+        .quiz-radio {
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
             display: flex;
-            gap: 0.5rem;
-            margin-top: 0.7rem;
+            align-items: center;
+            justify-content: center;
+            min-height: auto;
         }
-
-        .btn-verify, .btn-delete {
-            padding: 0.3rem 0.8rem;
-            border-radius: 0.5rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: 0.2s;
+        .quiz-option-item.selected .quiz-radio {
+            border-color: #f59e5b;
+            background: #f59e5b;
+            box-shadow: inset 0 0 0 3px #151b26;
         }
-
-        .btn-verify {
-            background: #48bb78;
-            color: white;
-        }
-
-        .btn-verify:hover {
-            background: #38a169;
-        }
-
-        .btn-delete {
-            background: #fc8181;
-            color: white;
-        }
-
-        .btn-delete:hover {
-            background: #f56565;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 2rem;
-            color: #a0aec0;
-        }
-
-        /* Responsive */
-        @media (max-width: 900px) {
-            .grid-2col {
-                grid-template-columns: 1fr;
-            }
-            body {
-                padding: 1rem;
-            }
-            .header h1 {
-                font-size: 1.8rem;
-            }
-        }
-
         footer {
             text-align: center;
             margin-top: 2rem;
@@ -442,114 +357,249 @@
 <body>
     <div class="container">
         <header class="main-nav">
-            <div class="brand"><i class="fas fa-arrow-left"></i> OSIS</div>
+            <div class="brand" style="cursor: pointer;" onclick="window.history.back()"><i class="fas fa-arrow-left"></i> OSIS</div>
         </header>
 
-        <!-- Page Hero -->
-        <div class="page-hero">
-            <div class="page-title">Data Diri</div>
-            <div class="page-subtitle">Lengkapi data dirimu dengan lengkap untuk melanjutkan proses pendaftaran calon OSIS.</div>
+        <div class="page-hero" id="pageHeroHeader">
+            <div class="page-title" id="heroTitle">Data Diri</div>
+            <div class="page-subtitle" id="heroSubtitle">Lengkapi data dirimu dengan lengkap untuk melanjutkan proses pendaftaran calon OSIS.</div>
             <div class="title-underline"></div>
         </div>
 
-        <!-- Alert Messages -->
-        @if(session('success'))
-            <div class="alert alert-success">
-                <i class="fas fa-check-circle fa-lg"></i>
-                {{ session('success') }}
-            </div>
-        @endif
-
-        @if(session('error'))
-            <div class="alert alert-error">
-                <i class="fas fa-exclamation-circle fa-lg"></i>
-                {{ session('error') }}
-            </div>
-        @endif
-
-        <!-- Main Content -->
         <div class="grid-2col">
             <div class="card">
                 <div class="card-body">
-                    <form method="POST" action="{{ route('osis.submit') }}">
+                    <form method="GET" action="/pengumuman" id="osisForm">
                         @csrf
-
                         <div class="step-1">
                             <div class="input-grid">
                                 <div class="form-group">
                                     <label>Nama Lengkap <span class="required">*</span></label>
                                     <span class="icon-circle"><i class="fas fa-user"></i></span>
-                                    <input type="text" name="nama" value="{{ old('nama') }}" required placeholder="Masukkan nama lengkap">
-                                    @error('nama') <small style="color:#e53e3e">{{ $message }}</small> @enderror
+                                    <input type="text" id="input_nama" name="nama" value="{{ old('nama') }}" required placeholder="Masukkan nama lengkap">
                                 </div>
 
                                 <div class="form-group">
                                     <label>NIS <span class="required">*</span></label>
                                     <span class="icon-circle"><i class="fas fa-id-card"></i></span>
-                                    <input type="text" name="nis" value="{{ old('nis') }}" required placeholder="Masukkan NIS">
-                                    @error('nis') <small style="color:#e53e3e">{{ $message }}</small> @enderror
+                                    <input type="text" id="input_nis" name="nis" value="{{ old('nis') }}" required placeholder="Masukkan NIS">
                                 </div>
 
                                 <div class="form-group">
                                     <label>Kelas <span class="required">*</span></label>
                                     <span class="icon-circle"><i class="fas fa-book-open"></i></span>
-                                    <input type="text" name="kelas" value="{{ old('kelas') }}" required placeholder="Contoh XI PRL 2">
-                                    @error('kelas') <small style="color:#e53e3e">{{ $message }}</small> @enderror
+                                    <input type="text" id="input_kelas" name="kelas" value="{{ old('kelas') }}" required placeholder="Contoh XI PPLG 2">
                                 </div>
 
                                 <div class="form-group">
                                     <label>No. Handphone <span class="required">*</span></label>
                                     <span class="icon-circle"><i class="fas fa-phone"></i></span>
-                                    <input type="text" name="no_hp" value="{{ old('no_hp') }}" required placeholder="08xxxxxxxxxxxx">
-                                    @error('no_hp') <small style="color:#e53e3e">{{ $message }}</small> @enderror
+                                    <input type="text" id="input_nohp" name="no_hp" value="{{ old('no_hp') }}" required placeholder="08xxxxxxxxxxxx">
                                 </div>
                             </div>
 
                             <div class="form-actions">
                                 <button type="button" id="nextBtn" class="btn-primary">
-                                    <i class="fas fa-arrow-right"></i>
-                                    Selanjutnya
+                                    Next: Pilih Bidang <i class="fas fa-arrow-right"></i>
                                 </button>
                             </div>
                         </div>
-        <footer>
-            <i class="fas fa-copyright"></i> 2026 - Sistem Pemilihan OSIS
+
         </footer>
     </div>
 
     <script>
+        // DOM Elements Navigator
+        const step1 = document.querySelector('.step-1');
         const step2 = document.querySelector('.step-2');
+        const step3 = document.querySelector('.step-3');
+        
         const nextBtn = document.getElementById('nextBtn');
+        const backToStep1 = document.getElementById('backToStep1');
+        const goToQuizBtn = document.getElementById('goToQuizBtn');
+        
+        const heroTitle = document.getElementById('heroTitle');
+        const heroSubtitle = document.getElementById('heroSubtitle');
         const sekbidOptions = document.querySelectorAll('.sekbid-option');
         const hiddenInput = document.getElementById('selectedSekbid');
+        const hiddenInputNama = document.getElementById('selectedSekbidNama');
 
+        // --- SISTEM BANK SOAL SELEKSI (BERBOBOT NILAI) ---
+        const daftarKuis = [
+            {
+                tanya: "Kenapa kamu memilih sekbid ini?",
+                opsi: [
+                    { teks: "Ingin berkontribusi nyata mengembangkan minat bakat siswa secara bertanggung jawab.", skor: 25 },
+                    { teks: "Diajak oleh teman sebaya dan ingin menambah relasi lingkungan sekolah.", skor: 15 },
+                    { teks: "Hanya coba-coba untuk mengisi waktu luang di luar jam kelas belajar.", skor: 5 },
+                    { teks: "Ingin mendapatkan prioritas nilai tambah dari guru kepengurusan.", skor: 10 }
+                ]
+            },
+            {
+                tanya: "Bagaimana cara kamu membagi waktu antara rapat kegiatan OSIS dan kewajiban utama belajar?",
+                opsi: [
+                    { teks: "Membuat skala prioritas jadwal mingguan dan meminta izin formal jika bentrok kelas.", skor: 25 },
+                    { teks: "Meninggalkan kelas belajar demi loyalitas penuh agenda rapat organisasi.", skor: 10 },
+                    { teks: "Mementingkan belajar penuh dan mengabaikan program kerja yang ditugaskan.", skor: 15 },
+                    { teks: "Mengikuti mana yang paling seru dan ramai di hari tersebut.", skor: 5 }
+                ]
+            },
+            {
+                tanya: "Jika ide program kerja divisi kamu ditolak saat rapat pleno, sikap apa yang kamu ambil?",
+                opsi: [
+                    { teks: "Menerima dengan lapang dada, mengevaluasi kritik, lalu menyusun alternatif baru.", skor: 25 },
+                    { teks: "Marah dan menolak mengikuti program kerja divisi lain.", skor: 0 },
+                    { teks: "Pasrah sepenuhnya dan membiarkan ketua mengambil alih urusan rencana.", skor: 10 },
+                    { teks: "Tetap memaksakan ide pribadi berjalan tanpa persetujuan komite.", skor: 5 }
+                ]
+            },
+            {
+                tanya: "Apa yang kamu lakukan jika melihat sesama rekan pengurus pasif dalam mengelola acara sekolah?",
+                opsi: [
+                    { teks: "Mengajaknya berdiskusi empat mata untuk mendengarkan kendala dan memberi dorongan semangat.", skor: 25 },
+                    { teks: "Melaporkannya langsung ke pembina agar dikeluarkan dari kepengurusan.", skor: 10 },
+                    { teks: "Membiarkannya saja dan memilih mengerjakan semua tugas sendirian.", skor: 15 },
+                    { teks: "Ikut-ikutan menjadi malas bekerja karena merasa pembagian tugas tidak adil.", skor: 5 }
+                ]
+            }
+        ];
+
+        let kuisIndex = 0;
+        let jawabanTerpilih = {}; // Menyimpan indeks opsi yang dipilih per soal
+
+        // Navigator Step 1 ke Step 2
         nextBtn.addEventListener('click', () => {
-            window.location.href = "{{ route('osis.pilihBidang') }}";
-        });
 
+
+        // Pilihan Seleksi Sekbid Cards
         sekbidOptions.forEach(option => {
             option.addEventListener('click', function() {
                 const id = this.getAttribute('data-id');
+                const nama = this.getAttribute('data-nama');
                 hiddenInput.value = id;
+                hiddenInputNama.value = nama;
 
                 sekbidOptions.forEach(opt => opt.classList.remove('selected'));
                 this.classList.add('selected');
             });
         });
 
-        @if(old('sekbid_id') || old('alasan') || old('kontribusi') || old('pengalaman'))
-            step2.classList.remove('hidden');
-            nextBtn.classList.add('hidden');
-        @endif
-
-        @if(old('sekbid_id'))
-            const oldId = "{{ old('sekbid_id') }}";
-            const oldOption = document.querySelector(`.sekbid-option[data-id='${oldId}']`);
-            if(oldOption) {
-                oldOption.classList.add('selected');
-                hiddenInput.value = oldId;
+        // Navigator Step 2 ke Step 3 (Quiz Mulai)
+        goToQuizBtn.addEventListener('click', () => {
+            if(!hiddenInput.value){
+                Swal.fire('Pilih Sekbid', 'Silakan tentukan pilihan Sekbid kamu terlebih dahulu!', 'warning');
+                return;
             }
-        @endif
+            if(!document.getElementById('input_alasan').value || !document.getElementById('input_kontribusi').value){
+                Swal.fire('Esay Kosong', 'Harap berikan alasan ketertarikan dan kontribusi nyata Anda!', 'warning');
+                return;
+            }
+
+            step2.classList.add('hidden');
+            step3.classList.remove('hidden');
+            heroTitle.innerText = "Kuis Seleksi";
+            heroSubtitle.innerText = "Jawablah pertanyaan kuis berikut untuk mengukur kapabilitas dan kesiapan berorganisasi.";
+            
+            kuisIndex = 0;
+            renderSoalKuis();
+        });
+
+        // Rendering Tampilan Soal Kuis
+        function renderSoalKuis() {
+            const dataSoal = daftarKuis[kuisIndex];
+            const totalSoal = daftarKuis.length;
+
+            // Update Teks & Progress Tracker Visual
+            document.getElementById('quiz-step-text').innerText = `Pertanyaan ${kuisIndex + 1} dari ${totalSoal}`;
+            const persen = Math.round(((kuisIndex + 1) / totalSoal) * 100);
+            document.getElementById('quiz-percent-text').innerText = `${persen}% Completed`;
+            document.getElementById('quizProgressFill').style.width = `${persen}%`;
+
+            // Render Teks Pertanyaan
+            document.getElementById('quizQuestionText').innerText = `${kuisIndex + 1}. ${dataSoal.tanya}`;
+
+            // Render Opsi Jawaban Radio-Style
+            const containerOpsi = document.getElementById('quizOptionsContainer');
+            containerOpsi.innerHTML = '';
+
+            dataSoal.opsi.forEach((opsi, idx) => {
+                const isSelected = jawabanTerpilih[kuisIndex] === idx ? 'selected' : '';
+                containerOpsi.innerHTML += `
+                    <div class="quiz-option-item ${isSelected}" onclick="pilihOpsiKuis(${idx})">
+                        <div class="quiz-radio"></div>
+                        <span style="font-size:0.95rem; color:rgba(255,255,255,0.85); line-height:1.4;">${opsi.teks}</span>
+                    </div>
+                `;
+            });
+
+            // Ganti teks tombol jika berada di halaman terakhir kuis
+            const nextBtnText = document.getElementById('quizNextBtn');
+            if (kuisIndex === totalSoal - 1) {
+                nextBtnText.innerHTML = `Kirim Pendaftaran <i class="fas fa-paper-plane"></i>`;
+                nextBtnText.style.background = "linear-gradient(135deg, #48bb78, #38a169)";
+            } else {
+                nextBtnText.innerHTML = `Selanjutnya <i class="fas fa-arrow-right"></i>`;
+                nextBtnText.style.background = "#f59e5b";
+            }
+        }
+
+        // Trigger saat Opsi Radio diklik
+        function pilihOpsiKuis(idx) {
+            jawabanTerpilih[kuisIndex] = idx;
+            renderSoalKuis(); // Refresh class style selected
+        }
+
+        // Aksi Tombol Next / Submit Kuis
+        document.getElementById('quizNextBtn').addEventListener('click', () => {
+            if (jawabanTerpilih[kuisIndex] === undefined) {
+                Swal.fire('Jawaban Kosong', 'Pilih salah satu radio jawaban sebelum melanjutkan!', 'warning');
+                return;
+            }
+
+            if (kuisIndex < daftarKuis.length - 1) {
+                kuisIndex++;
+                renderSoalKuis();
+            } else {
+                // Hitung total akumulasi skor kuis sebelum submit form
+                let totalSkor = 0;
+                daftarKuis.forEach((soal, idx) => {
+                    const idxPilihan = jawabanTerpilih[idx];
+                    totalSkor += soal.opsi[idxPilihan].skor;
+                });
+
+                document.getElementById('totalQuizScore').value = totalSkor;
+
+                // Tampilkan SweetAlert konfirmasi akhir pendaftaran
+                Swal.fire({
+                    title: 'Submit Form Pendaftaran?',
+                    text: "Seluruh jawaban akan dikunci dan diakumulasikan oleh sistem.",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#f59e5b',
+                    cancelButtonColor: '#4a5568',
+                    confirmButtonText: 'Ya, Kirim Data',
+                    cancelButtonText: 'Cek Kembali'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('osisForm').submit();
+                    }
+                });
+            }
+        });
+
+        // Aksi Tombol Kembali di dalam Kuis
+        document.getElementById('quizBackBtn').addEventListener('click', () => {
+            if (kuisIndex > 0) {
+                kuisIndex--;
+                renderSoalKuis();
+            } else {
+                // Jika di pertanyaan pertama, balikkan ke Step 2 (Pilih Bidang)
+                step3.classList.add('hidden');
+                step2.classList.remove('hidden');
+                heroTitle.innerText = "PILIH BIDANG";
+                heroSubtitle.innerText = "Pilihlah salah satu seksi bidang yang paling sesuai dengan passion dan keahlian tokomu.";
+            }
+        });
     </script>
 </body>
 </html>
