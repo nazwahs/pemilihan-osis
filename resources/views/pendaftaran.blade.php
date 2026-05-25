@@ -405,85 +405,6 @@
                             </div>
                         </div>
 
-                        <div class="step-2 hidden">
-                            <label>Pilih Sekbid yang diminati <span class="required">*</span></label>
-                            <div class="sekbid-grid" id="sekbidGrid">
-                                @if(isset($sekbid) && count($sekbid) > 0)
-                                    @foreach($sekbid as $id => $data)
-                                    <div class="sekbid-option" data-id="{{ $id }}" data-nama="{{ $data['nama'] }}">
-                                        <div class="radio-check"></div>
-                                        <div class="sekbid-icon">
-                                            <i class="fas fa-{{ $data['icon'] }}" style="color: {{ $data['color'] }}"></i>
-                                        </div>
-                                        <div class="sekbid-name">{{ $data['nama'] }}</div>
-                                    </div>
-                                    @endforeach
-                                @else
-                                    <div class="sekbid-option" data-id="1" data-nama="Sekbid Keagamaan"><div class="radio-check"></div><div class="sekbid-icon"><i class="fas fa-mosque" style="color: #4299e1"></i></div><div class="sekbid-name">Sekbid Keagamaan</div></div>
-                                    <div class="sekbid-option" data-id="2" data-nama="Sekbid Olahraga"><div class="radio-check"></div><div class="sekbid-icon"><i class="fas fa-soccer-ball" style="color: #48bb78"></i></div><div class="sekbid-name">Sekbid Olahraga</div></div>
-                                    <div class="sekbid-option" data-id="3" data-nama="Sekbid Seni & Budaya"><div class="radio-check"></div><div class="sekbid-icon"><i class="fas fa-palette" style="color: #ed64a6"></i></div><div class="sekbid-name">Sekbid Seni & Budaya</div></div>
-                                    <div class="sekbid-option" data-id="4" data-nama="Sekbid Kepemimpinan"><div class="radio-check"></div><div class="sekbid-icon"><i class="fas fa-users" style="color: #ecc94b"></i></div><div class="sekbid-name">Sekbid Kepemimpinan</div></div>
-                                    <div class="sekbid-option" data-id="5" data-nama="Sekbid Literasi & IPTEK"><div class="radio-check"></div><div class="sekbid-icon"><i class="fas fa-laptop-code" style="color: #9f7aea"></i></div><div class="sekbid-name">Sekbid Literasi & IPTEK</div></div>
-                                @endif
-                            </div>
-                            <input type="hidden" name="sekbid_nama" id="selectedSekbidNama">
-                            <input type="hidden" name="sekbid_id" id="selectedSekbid" required>
-
-                            <div class="form-group">
-                                <label>📌 Mengapa Anda tertarik di sekbid ini? <span class="required">*</span></label>
-                                <textarea id="input_alasan" name="alasan" rows="3" placeholder="Jelaskan alasan ketertarikan Anda terhadap sekbid pilihan...">{{ old('alasan') }}</textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label>📌 Kontribusi apa yang bisa Anda berikan? <span class="required">*</span></label>
-                                <textarea id="input_kontribusi" name="kontribusi" rows="3" placeholder="Tuliskan ide, program kerja, atau kontribusi nyata yang akan Anda lakukan...">{{ old('kontribusi') }}</textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label>🏆 Pengalaman Organisasi (Opsional)</label>
-                                <textarea name="pengalaman" rows="2" placeholder="Pernah menjabat sebagai? (OSIS, MPK, Pramuka, dll)">{{ old('pengalaman') }}</textarea>
-                            </div>
-
-                            <div class="form-actions">
-                                <button type="button" id="backToStep1" class="btn-primary" style="background:#4a5568; color:white;">Kembali</button>
-                                <button type="button" id="goToQuizBtn" class="btn-primary">Next: Mulai Kuis <i class="fas fa-bolt"></i></button>
-                            </div>
-                        </div>
-
-                        <div class="step-3 hidden">
-                            <div class="quiz-progress-container">
-                                <div style="display:flex; justify-content:between; font-size:0.85rem; color:rgba(255,255,255,0.7)">
-                                    <span id="quiz-step-text">Pertanyaan 1 dari 4</span>
-                                    <span id="quiz-percent-text" style="margin-left: auto;">25% Completed</span>
-                                </div>
-                                <div class="quiz-progress-bar-wrapper">
-                                    <div id="quizProgressFill" class="quiz-progress-fill"></div>
-                                </div>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <h3 id="quizQuestionText" style="font-size: 1.25rem; font-weight:700; line-height:1.5; color:#ffffff;">
-                                    </h3>
-                            </div>
-
-                            <div id="quizOptionsContainer">
-                                </div>
-
-                            <input type="hidden" name="score" id="totalQuizScore" value="0">
-
-                            <div class="form-actions">
-                                <button type="button" id="quizBackBtn" class="btn-primary" style="background:#4a5568; color:white;">Kembali</button>
-                                <button type="button" id="quizNextBtn" class="btn-primary">Selanjutnya <i class="fas fa-arrow-right"></i></button>
-                            </div>
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <footer>
-            <i class="fas fa-copyright"></i> 2026 - Sistem Pemilihan OSIS | SMK Plus Pelita Nusantara
         </footer>
     </div>
 
@@ -548,23 +469,7 @@
 
         // Navigator Step 1 ke Step 2
         nextBtn.addEventListener('click', () => {
-            if(!document.getElementById('input_nama').value || !document.getElementById('input_nis').value || !document.getElementById('input_kelas').value || !document.getElementById('input_nohp').value){
-                Swal.fire('Form Belum Lengkap', 'Harap isi semua kolom identitas diri terlebih dahulu!', 'warning');
-                return;
-            }
-            step1.classList.add('hidden');
-            step2.classList.remove('hidden');
-            heroTitle.innerText = "PILIH BIDANG";
-            heroSubtitle.innerText = "Pilihlah salah satu seksi bidang yang paling sesuai dengan passion dan keahlian tokomu.";
-        });
 
-        // Kembali dari Step 2 ke Step 1
-        backToStep1.addEventListener('click', () => {
-            step2.classList.add('hidden');
-            step1.classList.remove('hidden');
-            heroTitle.innerText = "Data Diri";
-            heroSubtitle.innerText = "Lengkapi data dirimu dengan lengkap untuk melanjutkan proses pendaftaran calon OSIS.";
-        });
 
         // Pilihan Seleksi Sekbid Cards
         sekbidOptions.forEach(option => {

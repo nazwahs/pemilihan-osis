@@ -12,17 +12,7 @@ Route::get('/pengumuman', [OsisController::class, 'pengumuman'])->name('osis.pen
 
 // --- Halaman Pendaftaran & Kuis Seleksi OSIS ---
 Route::prefix('osis')->group(function () {
-    // 1. Tampilan Form Pendaftaran & Kuis Utama
-    Route::get('/pendaftaran', function () {
-        return view('quiz'); 
-    })->name('osis.pendaftaran');
 
-    // 2. Tampilan Hasil Evaluasi Skor Kuis (Setelah Form Di-submit)
-    Route::post('/submit', function (Request $request) {
-        return view('hasil');
-    })->name('osis.submit');
-
-    // --- Route Management Admin (Jika Ada) ---
     Route::post('/verifikasi/{id}', [OsisController::class, 'verifikasi'])->name('osis.verifikasi');
     Route::delete('/hapus/{id}', [OsisController::class, 'destroy'])->name('osis.destroy');
 });
