@@ -328,15 +328,12 @@
         </div>
 
         <!-- Action Buttons -->
-        <form id="bidangForm" method="POST" action="{{ route('osis.pilihBidang') }}">
-            @csrf
-            <input type="hidden" name="bidang_id" id="bidangInput">
-            <div class="action-buttons">
-                <a href="{{ route('osis.quiz') }}">
-    <button class="btn-primary">Selanjutnya</button>
-</a>
-            </div>
-        </form>
+        <div class="action-buttons">
+            <button id="submitBidang" type="button" class="btn-primary" onclick="goToQuiz()">
+                            Selanjutnya
+                        </button>
+        </div>
+        <input type="hidden" name="bidang_id" id="bidangInput">
 
         <footer>
             <i class="fas fa-copyright"></i> 2026 - Sistem Pemilihan OSIS
@@ -344,6 +341,8 @@
     </div>
 
     <script>
+        const userNama = @json(session('pendaftaran_nama', ''));
+        const userKelas = @json(session('pendaftaran_kelas', ''));
         let selectedBidang = null;
 
         function selectBidang(element) {
@@ -358,18 +357,22 @@
 
             // Set the hidden input value
             document.getElementById('bidangInput').value = selectedBidang;
-
-            // Enable next button
-            document.getElementById('nextBtn').disabled = false;
         }
 
-        // Handle form submission
-        document.getElementById('bidangForm').addEventListener('submit', function(e) {
+        function goToQuiz() {
             if (!selectedBidang) {
-                e.preventDefault();
                 alert('Silakan pilih bidang terlebih dahulu!');
+                return;
             }
-        });
+
+            const query = new URLSearchParams({
+                selectedBidang: selectedBidang,
+                nama: userNama,
+                kelas: userKelas
+            });
+
+            window.location.href = '{{ route('osis.quiz') }}?' + query.toString();
+        }
     </script>
 </body>
 </html>

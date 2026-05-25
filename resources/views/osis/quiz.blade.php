@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Seleksi OSIS | Aturan Keputusan SPK</title>
+    <title>Sistem Seleksi OSIS</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -138,96 +138,18 @@
 <body>
     <div class="container">
         <header class="main-nav">
-            <div class="brand"><i class="fas fa-graduation-cap"></i>OSIS</div>
+            <div class="brand" onclick="window.location.href='/'"><i class="fas fa-arrow-left"></i> OSIS</div>
         </header>
 
         <div class="page-hero" id="pageHeroHeader">
-            <div class="page-title" id="heroTitle">Data Diri</div>
-            <div class="page-subtitle" id="heroSubtitle">Lengkapi data dirimu dengan lengkap untuk melanjutkan proses pendaftaran calon pengurus OSIS.</div>
+            <div class="page-title" id="heroTitle">Pengerjaan Kuis Kompetensi</div>
+            <div class="page-subtitle" id="heroSubtitle">Sistem akan menyimpan dan memproses akumulasi skormu berdasarkan aturan SPK.</div>
             <div class="title-underline"></div>
         </div>
 
-        <div class="grid-2col">
-            <div class="card">
-                <div class="card-body">
-                    <form id="osisForm" onsubmit="event.preventDefault();">
-                        
-                        <div class="step-1">
-                            <div class="input-grid">
-                                <div class="form-group">
-                                    <label>Nama Lengkap <span class="required">*</span></label>
-                                    <span class="icon-circle"><i class="fas fa-user"></i></span>
-                                    <input type="text" id="input_nama" name="nama" value="{{ old('nama') }}" required placeholder="Masukkan nama lengkap">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>NIS <span class="required">*</span></label>
-                                    <span class="icon-circle"><i class="fas fa-id-card"></i></span>
-                                    <input type="text" id="input_nis" name="nis" value="{{ old('nis') }}" required placeholder="Masukkan NIS">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Kelas <span class="required">*</span></label>
-                                    <span class="icon-circle"><i class="fas fa-book-open"></i></span>
-                                    <input type="text" id="input_kelas" name="kelas" value="{{ old('kelas') }}" required placeholder="Contoh XI PPLG 2">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>No. Handphone <span class="required">*</span></label>
-                                    <span class="icon-circle"><i class="fas fa-phone"></i></span>
-                                    <input type="text" id="input_nohp" name="no_hp" value="{{ old('no_hp') }}" required placeholder="08xxxxxxxxxxxx">
-                                </div>
-                            </div>
-                            <div class="form-actions">
-                                <button type="button" id="nextBtn" class="btn-primary">
-                                    Next: Pilih Bidang <i class="fas fa-arrow-right"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="step-2 hidden">
-                            <label>Pilih Seksi Bidang yang Diminati <span class="required">*</span></label>
-                            <div class="sekbid-grid" id="sekbidGrid">
-                                <div class="sekbid-option" data-id="1" data-nama="Sekbid 1 (Keagamaan)">
-                                    <div class="radio-check"></div>
-                                    <div class="sekbid-icon"><i class="fas fa-mosque" style="color: #4299e1"></i></div>
-                                    <div class="sekbid-name">Sekbid 1 (Keagamaan)</div>
-                                </div>
-                                <div class="sekbid-option" data-id="2" data-nama="Sekbid 2 (Pendidikan & Penalaran)">
-                                    <div class="radio-check"></div>
-                                    <div class="sekbid-icon"><i class="fas fa-brain" style="color: #48bb78"></i></div>
-                                    <div class="sekbid-name">Sekbid 2 (Pendidikan & Penalaran)</div>
-                                </div>
-                                <div class="sekbid-option" data-id="3" data-nama="Sekbid 3 (Kepribadian & Wawasan Kebangsaan)">
-                                    <div class="radio-check"></div>
-                                    <div class="sekbid-icon"><i class="fas fa-flag" style="color: #e53e3e"></i></div>
-                                    <div class="sekbid-name">Sekbid 3 (Wawasan Kebangsaan)</div>
-                                </div>
-                                <div class="sekbid-option" data-id="4" data-nama="Sekbid 4 (Olahraga & Kesenian)">
-                                    <div class="radio-check"></div>
-                                    <div class="sekbid-icon"><i class="fas fa-palette" style="color: #ed64a6"></i></div>
-                                    <div class="sekbid-name">Sekbid 4 (Olahraga & Kesenian)</div>
-                                </div>
-                                <div class="sekbid-option" data-id="5" data-nama="Sekbid 5 (Komunikasi, Informasi & Literasi)">
-                                    <div class="radio-check"></div>
-                                    <div class="sekbid-icon"><i class="fas fa-bullhorn" style="color: #9f7aea"></i></div>
-                                    <div class="sekbid-name">Sekbid 5 (Public Speaking)</div>
-                                </div>
-                                <div class="sekbid-option" data-id="6" data-nama="Sekbid 6 (Keterampilan & Wirausaha)">
-                                    <div class="radio-check"></div>
-                                    <div class="sekbid-icon"><i class="fas fa-lightbulb" style="color: #ecc94b"></i></div>
-                                    <div class="sekbid-name">Sekbid 6 (Wirausaha)</div>
-                                </div>
-                            </div>
-                            <input type="hidden" id="selectedSekbidId">
-                            <input type="hidden" id="selectedSekbidNama">
-
-                            <div class="form-actions">
-                                <button type="button" id="backToStep1" class="btn-primary" style="background:#4a5568; color:white;">Kembali</button>
-                                <button type="button" id="goToQuizBtn" class="btn-primary">Next: Mulai Kuis <i class="fas fa-bolt"></i></button>
-                            </div>
-                        </div>
-
+        <div class="card">
+            <div class="card-body">
+                <form id="osisForm">
                         <div class="step-3 hidden">
                             <div class="quiz-progress-container">
                                 <div style="display:flex; justify-content:space-between; font-size:0.85rem; color:rgba(255,255,255,0.7)">
@@ -297,18 +219,11 @@
     </div>
 
     <script>
-        const step1 = document.querySelector('.step-1');
-        const step2 = document.querySelector('.step-2');
         const step3 = document.querySelector('.step-3');
         const step4 = document.querySelector('.step-4');
         
-        const nextBtn = document.getElementById('nextBtn');
-        const backToStep1 = document.getElementById('backToStep1');
-        const goToQuizBtn = document.getElementById('goToQuizBtn');
-        
         const heroTitle = document.getElementById('heroTitle');
         const heroSubtitle = document.getElementById('heroSubtitle');
-        const sekbidOptions = document.querySelectorAll('.sekbid-option');
 
         // BANK DATA PERTANYAAN DAN SKOR REAL USER
         const bankKuisSekbid = {
@@ -358,55 +273,39 @@
 
         let daftarKuisAktif = [];
         let kuisIndex = 0;
-        let jawabanTerpilih = {}; 
+        let jawabanTerpilih = {};
+        let selectedSekbidNama = '';
 
-        // S1 -> S2
-        nextBtn.addEventListener('click', () => {
-            if(!document.getElementById('input_nama').value || !document.getElementById('input_kelas').value){
-                Swal.fire('Form Belum Lengkap', 'Harap isi Nama dan Kelas terlebih dahulu!', 'warning');
-                return;
-            }
-            step1.classList.add('hidden');
-            step2.classList.remove('hidden');
-            heroTitle.innerText = "Pilih Seksi Bidang";
-            heroSubtitle.innerText = "Silakan tentukan sub-organisasi OSIS yang ingin kamu kembangkan.";
-        });
+        const sekbidNames = {
+            "1": "Sekbid 1 (Keagamaan)",
+            "2": "Sekbid 2 (Pendidikan & Penalaran)",
+            "3": "Sekbid 3 (Kepribadian & Wawasan Kebangsaan)",
+            "4": "Sekbid 4 (Olahraga & Kesenian)",
+            "5": "Sekbid 5 (Komunikasi, Informasi & Literasi)",
+            "6": "Sekbid 6 (Keterampilan & Wirausaha)"
+        };
 
-        // S2 -> S1
-        backToStep1.addEventListener('click', () => {
-            step2.classList.add('hidden');
-            step1.classList.remove('hidden');
-            heroTitle.innerText = "Data Diri";
-        });
-
-        // Handle Klik Card Sekbid
-        sekbidOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                document.getElementById('selectedSekbidId').value = this.getAttribute('data-id');
-                document.getElementById('selectedSekbidNama').value = this.getAttribute('data-nama');
-                sekbidOptions.forEach(opt => opt.classList.remove('selected'));
-                this.classList.add('selected');
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedBidangFromQuery = urlParams.get('selectedBidang');
+        const selectedNama = urlParams.get('nama') || @json(session('pendaftaran_nama', '-'));
+        const selectedKelas = urlParams.get('kelas') || @json(session('pendaftaran_kelas', '-'));
+        if (!selectedBidangFromQuery || !bankKuisSekbid[selectedBidangFromQuery]) {
+            Swal.fire({
+                title: 'Bidang belum dipilih',
+                text: 'Silakan pilih bidang lewat halaman Pilih Bidang terlebih dahulu.',
+                icon: 'warning',
+                confirmButtonText: 'Kembali'
+            }).then(() => {
+                window.location.href = '{{ route('osis.pilih_bidang') }}';
             });
-        });
-
-        // S2 -> S3 (Load Soal Berdasarkan Pilihan)
-        goToQuizBtn.addEventListener('click', () => {
-            const sekbidId = document.getElementById('selectedSekbidId').value;
-            if(!sekbidId){
-                Swal.fire('Pilih Sekbid', 'Silakan klik salah satu Sekbid di atas!', 'warning');
-                return;
-            }
-
-            daftarKuisAktif = bankKuisSekbid[sekbidId];
-            step2.classList.add('hidden');
+        } else {
+            daftarKuisAktif = bankKuisSekbid[selectedBidangFromQuery];
+            selectedSekbidNama = sekbidNames[selectedBidangFromQuery] || 'Unknown';
             step3.classList.remove('hidden');
-            heroTitle.innerText = "Pengerjaan Kuis Kompetensi";
-            heroSubtitle.innerText = "Sistem akan menyimpan dan memproses akumulasi skormu berdasarkan aturan SPK.";
-            
             kuisIndex = 0;
             jawabanTerpilih = {};
             renderSoalKuis();
-        });
+        }
 
         function renderSoalKuis() {
             const dataSoal = daftarKuisAktif[kuisIndex];
@@ -476,9 +375,9 @@
                 });
 
                 // Mapping Pengisian Nilai Baru ke Elemen Pill Badge
-                document.getElementById('lblNama').innerText = document.getElementById('input_nama').value;
-                document.getElementById('lblKelas').innerText = document.getElementById('input_kelas').value;
-                document.getElementById('lblSekbid').innerText = document.getElementById('selectedSekbidNama').value;
+                document.getElementById('lblNama').innerText = selectedNama;
+                document.getElementById('lblKelas').innerText = selectedKelas;
+                document.getElementById('lblSekbid').innerText = selectedSekbidNama;
                 document.getElementById('lblNilai').innerText = `${totalSkor}/100`;
 
                 const areaLolos = document.getElementById('containerLolos');
@@ -504,15 +403,7 @@
 
         // Restart Form / Kembali ke Dashboard
         document.getElementById('restartBtn').addEventListener('click', () => {
-            document.getElementById('osisForm').reset();
-            sekbidOptions.forEach(opt => opt.classList.remove('selected'));
-            document.getElementById('selectedSekbidId').value = "";
-            document.getElementById('selectedSekbidNama').value = "";
-            
-            step4.classList.add('hidden');
-            step1.classList.remove('hidden');
-            heroTitle.innerText = "Data Diri";
-            heroSubtitle.innerText = "Lengkapi data dirimu dengan lengkap untuk melanjutkan proses pendaftaran calon pengurus OSIS.";
+            window.location.href = '{{ route('home') }}';
         });
     </script>
 </body>

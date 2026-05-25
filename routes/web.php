@@ -1,35 +1,52 @@
 <?php
 
 use App\Http\Controllers\OsisController;
+use App\Http\Controllers\PendaftaranController;
 use Illuminate\Support\Facades\Route;
 
-// Route Halaman Utama & Informasi Umum
 Route::get('/', [OsisController::class, 'home'])->name('home');
-Route::get('/osis/pendaftaran', function () {
-    return view('pendaftaran');
-})->name('osis.pendaftaran');
-Route::get('/pilih_bidang', function () {
-    return view('pilih_bidang');
-})->name('pilih_bidang');
-Route::get('/osis/quiz', function () {
-    return view('quiz');
-})->name('osis.quiz');
-Route::get('/informasi', [OsisController::class, 'informasi'])->name('osis.informasi');
-Route::get('/jadwal', [OsisController::class, 'jadwal'])->name('osis.jadwal');
-Route::get('/pengumuman', [OsisController::class, 'pengumuman'])->name('osis.pengumuman');
 
-// Route Sistem Pendaftaran OSIS Berbasis SPK
-Route::prefix('osis')->group(function () {
-    Route::post('/pilih-bidang', function () {
-        return view('pilih_bidang');
-    })->name('osis.pilihBidang');
-    Route::post('/verifikasi/{id}', [OsisController::class, 'verifikasi'])->name('osis.verifikasi');
-    Route::delete('/hapus/{id}', [OsisController::class, 'destroy'])->name('osis.destroy');
+Route::prefix('osis')->name('osis.')->group(function () {
+
+    Route::get('/pendaftaran', [PendaftaranController::class, 'index'])
+        ->name('pendaftaran');
+
+    Route::post('/pendaftaran', [PendaftaranController::class, 'store'])
+        ->name('pendaftaran.store');
+
+    Route::view('/pilih-bidang', 'osis.pilih_bidang')
+        ->name('pilih_bidang');
+
+    Route::view('/quiz', 'osis.quiz')
+        ->name('quiz');
+
+    Route::view('/informasi', 'osis.informasi')
+        ->name('informasi');
+
+    Route::view('/jadwal', 'osis.jadwal')
+        ->name('jadwal');
+
+    Route::view('/pengumuman', 'osis.pengumuman')
+        ->name('pengumuman');
+
+    Route::post('/verifikasi/{id}', [OsisController::class, 'verifikasi'])
+        ->name('verifikasi');
+
+    Route::delete('/hapus/{id}', [OsisController::class, 'destroy'])
+        ->name('destroy');
 });
 
-Route::view('/admin/login', 'admin.login');
-Route::view('/admin/dashboard', 'admin.dashboard');
-Route::view('/admin/peserta', 'admin.peserta')
-    ->name('admin.peserta');
-Route::view('/admin/verifikasi', 'admin.verifikasi')
-    ->name('admin.verifikasi');
+Route::prefix('admin')->name('admin.')->group(function () {
+
+    Route::view('/login', 'admin.login')
+        ->name('login');
+
+    Route::view('/dashboard', 'admin.dashboard')
+        ->name('dashboard');
+
+    Route::view('/peserta', 'admin.peserta')
+        ->name('peserta');
+
+    Route::view('/verifikasi', 'admin.verifikasi')
+        ->name('verifikasi');
+});

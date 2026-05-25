@@ -13,8 +13,20 @@ class Pendaftaran extends Model
         'nis',
         'kelas',
         'no_hp',
-        'sekbid',
-        'alasan',
+        'sekbid_id',
         'status'
     ];
+
+    /**
+     * Relasi ke sekbid
+     */
+    public function sekbid()
+    {
+        return $this->belongsTo(Sekbid::class);
+    }
+
+      public function jawabans()
+    {
+        return $this->hasMany(Jawaban::class);
+    }
 }

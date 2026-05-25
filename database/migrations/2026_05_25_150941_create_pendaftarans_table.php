@@ -13,25 +13,23 @@ return new class extends Migration
     {
         Schema::create('pendaftarans', function (Blueprint $table) {
 
-            $table->id();
+    $table->id();
 
-            $table->string('nama_lengkap');
-            $table->string('nis');
-            $table->string('kelas');
-            $table->string('no_hp');
+    $table->string('nama_lengkap');
+    $table->string('nis')->unique();
+    $table->string('kelas');
+    $table->string('no_hp');
 
-            $table->string('sekbid');
+    $table->foreignId('sekbid_id')->nullable()->constrained();
 
-            $table->text('alasan');
+    $table->enum('status', [
+        'pending',
+        'lolos',
+        'gagal'
+    ])->default('pending');
 
-            $table->enum('status', [
-                'pending',
-                'lolos',
-                'gagal'
-            ])->default('pending');
-
-            $table->timestamps();
-        });
+    $table->timestamps();
+});
     }
 
     /**

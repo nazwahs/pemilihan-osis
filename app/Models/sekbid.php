@@ -4,14 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class sekbid extends Model
+class Sekbid extends Model
 {
-    public function pendaftar()
+    protected $fillable = [
+        'nama_sekbid',
+        'deskripsi'
+    ];
+
+    public function pendaftarans()
     {
-        return $this->hasMany(Pendaftar::class);
+        return $this->hasMany(Pendaftaran::class);
     }
 
-    public function pertanyaan()
+    public function pertanyaans()
     {
         return $this->hasMany(Pertanyaan::class);
     }

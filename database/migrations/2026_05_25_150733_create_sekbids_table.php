@@ -12,9 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sekbids', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+    $table->id();
+    $table->string('nama_sekbid');
+    $table->text('deskripsi');
+    $table->timestamps();
+});
     }
 
     /**

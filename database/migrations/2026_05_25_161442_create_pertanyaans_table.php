@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('registrations', function (Blueprint $table) {
+     Schema::create('pertanyaans', function (Blueprint $table) {
+    $table->id();
 
-            $table->id();
+    $table->foreignId('sekbid_id')
+          ->constrained('sekbids')
+          ->onDelete('cascade');
 
-            $table->string('nama_lengkap');
-            $table->string('kelas');
-            $table->string('nis')->unique();
-            $table->string('no_hp');
+    $table->text('pertanyaan');
 
-            $table->timestamps();
-        });
+    $table->timestamps();
+});
     }
 
     /**
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('registrations');
+        Schema::dropIfExists('pertanyaans');
     }
 };
