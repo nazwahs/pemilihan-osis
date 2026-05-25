@@ -16,3 +16,10 @@ Route::prefix('osis')->group(function () {
     Route::post('/verifikasi/{id}', [OsisController::class, 'verifikasi'])->name('osis.verifikasi');
     Route::delete('/hapus/{id}', [OsisController::class, 'destroy'])->name('osis.destroy');
 });
+
+Route::view('/admin/login', 'admin.login');
+Route::view('/admin/dashboard', 'admin.dashboard');
+Route::view('/admin/peserta', 'admin.peserta')
+    ->name('admin.peserta');
+Route::view('/admin/verifikasi', 'admin.verifikasi')
+    ->name('admin.verifikasi');
