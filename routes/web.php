@@ -5,24 +5,25 @@ use Illuminate\Support\Facades\Route;
 
 // Route Halaman Utama & Informasi Umum
 Route::get('/', [OsisController::class, 'home'])->name('home');
+Route::get('/osis/pendaftaran', function () {
+    return view('pendaftaran');
+})->name('osis.pendaftaran');
+Route::get('/pilih_bidang', function () {
+    return view('pilih_bidang');
+})->name('pilih_bidang');
+Route::get('/osis/quiz', function () {
+    return view('quiz');
+})->name('osis.quiz');
 Route::get('/informasi', [OsisController::class, 'informasi'])->name('osis.informasi');
 Route::get('/jadwal', [OsisController::class, 'jadwal'])->name('osis.jadwal');
 Route::get('/pengumuman', [OsisController::class, 'pengumuman'])->name('osis.pengumuman');
 
 // Route Sistem Pendaftaran OSIS Berbasis SPK
 Route::prefix('osis')->group(function () {
-    // 1. Halaman Awal & Submit Biodata
-    Route::get('/pendaftaran', [OsisController::class, 'index'])->name('osis.pendaftaran');
-    Route::post('/submit', [OsisController::class, 'submitBiodata'])->name('osis.submit');
-    
-    // 2. Alur Kuis SPK (Baru)
-    Route::get('/quiz', [OsisController::class, 'showQuiz'])->name('osis.quiz');
-    Route::post('/quiz/submit', [OsisController::class, 'submitQuiz'])->name('osis.submit_quiz');
-    
-    // 3. Halaman Hasil Pengumuman SPK (Baru)
-    Route::get('/hasil/{id}', [OsisController::class, 'hasil'])->name('osis.hasil');
-
-    // 4. Manajemen Data (Fitur Bawaan Kamu)
+    Route::post('/pilih-bidang', function () {
+        return view('pilih_bidang');
+    })->name('osis.pilihBidang');
+    Route::post('/verifikasi/{id}', [OsisController::class, 'verifikasi'])->name('osis.verifikasi');
     Route::delete('/hapus/{id}', [OsisController::class, 'destroy'])->name('osis.destroy');
 });
 

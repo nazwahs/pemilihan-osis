@@ -21,7 +21,7 @@
             font-family: 'Inter', sans-serif;
             background: #23293a; /* dark navy */
             min-height: 100vh;
-            padding: 1.5rem 2rem;
+            padding: 0.8rem 1.2rem;
             color: rgba(255,255,255,0.95);
         }
 
@@ -34,7 +34,7 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-            margin-bottom: 1.25rem;
+            margin-bottom: 0.8rem;
         }
 
         .brand {
@@ -50,19 +50,20 @@
         /* Header / Page Title */
         .page-hero {
             display: block;
-            margin-bottom: 2rem;
+            margin-bottom: 0.8rem;
         }
 
         .page-title {
-            font-size: 3.4rem;
+            font-size: 2.4rem;
             font-weight: 800;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.2rem;
             color: #ffffff;
         }
 
         .page-subtitle {
             color: rgba(255,255,255,0.75);
-            margin-bottom: 1rem;
+            margin-bottom: 0.4rem;
+            font-size: 0.85rem;
         }
 
         .title-underline {
@@ -70,21 +71,21 @@
             height: 4px;
             background: rgba(255,255,255,0.12);
             border-radius: 4px;
-            margin: 1rem 0 1.6rem 0;
+            margin: 0.4rem 0 0.7rem 0;
         }
 
         /* Bidang Cards Grid */
         .bidang-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.8rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.7rem;
+            margin-bottom: 0.8rem;
         }
 
         .bidang-card {
             background: rgba(255,255,255,0.95);
             border-radius: 1.5rem;
-            padding: 2rem 1.5rem;
+            padding: 0.9rem 0.8rem;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -114,30 +115,30 @@
         }
 
         .bidang-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 1rem;
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 0.4rem;
             background: #f0f4f8;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
+            font-size: 1.6rem;
             transition: all 0.3s;
         }
 
         .bidang-name {
-            font-size: 1.2rem;
+            font-size: 0.85rem;
             font-weight: 700;
             color: #2d3748;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.25rem;
         }
 
         .bidang-description {
-            font-size: 0.9rem;
+            font-size: 0.75rem;
             color: #718096;
-            line-height: 1.6;
-            min-height: 60px;
+            line-height: 1.3;
+            min-height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -145,36 +146,30 @@
 
         /* Action Buttons */
         .action-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 2rem;
+            text-align: right;
+            margin-top: 1rem;
         }
 
         .btn-primary {
             background: #f59e5b;
             color: #1b1e32;
-            padding: 1rem 2rem;
+            padding: 0.9rem 1.6rem;
             border-radius: 999px;
             border: none;
             font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
-            box-shadow: 0 10px 30px rgba(245,158,92,0.3);
+            box-shadow: 0 10px 30px rgba(245, 158, 91, 0.4);
             transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(245,158,92,0.4);
+            box-shadow: 0 15px 40px rgba(245, 158, 91, 0.5);
         }
 
-        .btn-primary:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
+        .btn-primary:active {
+            transform: translateY(0);
         }
 
         .btn-secondary {
@@ -200,7 +195,7 @@
         /* Responsive */
         @media (max-width: 900px) {
             .bidang-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                grid-template-columns: repeat(3, 1fr);
                 gap: 1.2rem;
             }
 
@@ -238,9 +233,9 @@
 
         footer {
             text-align: center;
-            margin-top: 3rem;
+            margin-top: 0.5rem;
             color: rgba(255,255,255,0.7);
-            font-size: 0.8rem;
+            font-size: 0.7rem;
         }
     </style>
 </head>
@@ -265,7 +260,7 @@
                     <i class="fas fa-hands-praying"></i>
                 </div>
                 <div class="bidang-name">SEKSI BIDANG 1</div>
-                <div style="font-size: 0.95rem; font-weight: 600; color: #2d3748; margin-bottom: 0.5rem;">Keagamaan</div>
+                <div style="font-size: 0.8rem; font-weight: 600; color: #2d3748; margin-bottom: 0.3rem;">Keagamaan</div>
                 <div class="bidang-description">
                     Mengelola kegiatan yang membangun iman, ketakwaan, dan relevansi siswa dalam kehidupan sehari-hari.
                 </div>
@@ -277,7 +272,7 @@
                     <i class="fas fa-book"></i>
                 </div>
                 <div class="bidang-name">SEKSI BIDANG 2</div>
-                <div style="font-size: 0.95rem; font-weight: 600; color: #2d3748; margin-bottom: 0.5rem;">Pendidikan & Penalaran</div>
+                <div style="font-size: 0.8rem; font-weight: 600; color: #2d3748; margin-bottom: 0.3rem;">Pendidikan & Penalaran</div>
                 <div class="bidang-description">
                     bertugas meningkatkan wawasan dan kemampuan berpikir siswa melalui diskusi, dan lomba akademik.
                 </div>
@@ -289,7 +284,7 @@
                     <i class="fas fa-landmark"></i>
                 </div>
                 <div class="bidang-name">SEKSI BIDANG 3</div>
-                <div style="font-size: 0.95rem; font-weight: 600; color: #2d3748; margin-bottom: 0.5rem;">Wawasan Kebangsaan</div>
+                <div style="font-size: 0.8rem; font-weight: 600; color: #2d3748; margin-bottom: 0.3rem;">Wawasan Kebangsaan</div>
                 <div class="bidang-description">
                     Membentuk karakter siswa yang disiplin, bertanggung jawab jawab, serta menumbuhkan rasa cinta tanah air dan semangat kebangsaan.
                 </div>
@@ -301,7 +296,7 @@
                     <i class="fas fa-trophy"></i>
                 </div>
                 <div class="bidang-name">SEKSI BIDANG 4</div>
-                <div style="font-size: 0.95rem; font-weight: 600; color: #2d3748; margin-bottom: 0.5rem;">Olahraga & Kesenian</div>
+                <div style="font-size: 0.8rem; font-weight: 600; color: #2d3748; margin-bottom: 0.3rem;">Olahraga & Kesenian</div>
                 <div class="bidang-description">
                     bertugas mengembangkan bakat siswa melalui kegiatan olahraga dan seni serta mengadakan lomba akademik atau pentas.
                 </div>
@@ -313,7 +308,7 @@
                     <i class="fas fa-share-alt"></i>
                 </div>
                 <div class="bidang-name">SEKSI BIDANG 5</div>
-                <div style="font-size: 0.95rem; font-weight: 600; color: #2d3748; margin-bottom: 0.5rem;">Komunikasi & Informasi</div>
+                <div style="font-size: 0.8rem; font-weight: 600; color: #2d3748; margin-bottom: 0.3rem;">Komunikasi & Informasi</div>
                 <div class="bidang-description">
                     bertugas menyebarkan informasi kegiatan sekolah serta mengadakan media komunikasi seperti majalah atau media sosial sekolah.
                 </div>
@@ -325,7 +320,7 @@
                     <i class="fas fa-lightbulb"></i>
                 </div>
                 <div class="bidang-name">SEKSI BIDANG 6</div>
-                <div style="font-size: 0.95rem; font-weight: 600; color: #2d3748; margin-bottom: 0.5rem;">Keterampilan & Wirausaha</div>
+                <div style="font-size: 0.8rem; font-weight: 600; color: #2d3748; margin-bottom: 0.3rem;">Keterampilan & Wirausaha</div>
                 <div class="bidang-description">
                     melaksanakan pemberdayaan kreativitas siswa melalui pelatihan dan kegiatan usaha seperti bazar atau market day.
                 </div>
@@ -336,16 +331,10 @@
         <form id="bidangForm" method="POST" action="{{ route('osis.pilihBidang') }}">
             @csrf
             <input type="hidden" name="bidang_id" id="bidangInput">
-            
             <div class="action-buttons">
-                <button type="button" class="btn-secondary" onclick="window.location.href='{{ route('osis.pendaftaran') }}'">
-                    <i class="fas fa-arrow-left"></i>
-                    Kembali
-                </button>
-                <button type="submit" class="btn-primary" id="nextBtn" disabled>
-                    Selanjutnya
-                    <i class="fas fa-arrow-right"></i>
-                </button>
+                <a href="{{ route('osis.quiz') }}">
+    <button class="btn-primary">Selanjutnya</button>
+</a>
             </div>
         </form>
 
